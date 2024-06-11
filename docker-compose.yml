@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  apache:
+    image: httpd:latest
+    ports:
+      - "81:80"
+    volumes:
+      - ./apache-config:/usr/local/apache2/conf/sites-available
+      - ./apache-logs:/usr/local/apache2/logs
+    depends_on:
+      - rpc
+      - rest
+      - soap
+
+  rpc:
+    build: ./rpc_service
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./rpc_service:/app
+
+  rest:
+    build: ./rest_service
+    ports:
+      - "7777:5000"
+    volumes:
+      - ./rest_service:/app
+
+  soap:
+    build: ./soap_service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./soap_service:/app
