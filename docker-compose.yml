@@ -4,7 +4,7 @@ services:
   apache:
     image: httpd:latest
     ports:
-      - "81:80"
+      - "80:80"
     volumes:
       - ./apache-config:/usr/local/apache2/conf/sites-available
       - ./apache-logs:/usr/local/apache2/logs
@@ -23,7 +23,7 @@ services:
   rest:
     build: ./rest_service
     ports:
-      - "7777:5000"
+      - "7777:5001"
     volumes:
       - ./rest_service:/app
 
